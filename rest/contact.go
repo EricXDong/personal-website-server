@@ -1,14 +1,10 @@
 package rest
 
 import (
-	"bytes"
 	"encoding/json"
-	"fmt"
-	"html/template"
 	"io/ioutil"
 	"net/http"
 	"net/smtp"
-	"os"
 	"personal-website-server/env"
 )
 
@@ -22,7 +18,6 @@ type ContactRequest struct {
 }
 
 type emailParameters struct {
-	From    string
 	To      string
 	Subject string
 	Message string
@@ -42,31 +37,16 @@ func (ch *ContactHandler) receiveContact(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	fmt.Println(request.Message)
-
 	//	Generate email from request
-	buffer := new(bytes.Buffer)
-	template := template.Must(template.New("email").Parse(generateEmailTemplate()))
-	template.Execute(buffer, &emailParameters{
-		From:    request.Email,
-		To:      ch.env.ContactEmail,
-		Subject: "Contact from " + request.Email,
-		Message: request.Message,
-	})
-	template.Execute(os.Stdout, &emailParameters{
-		From:    request.Email,
-		To:      ch.env.ContactEmail,
-		Subject: "Contact from " + request.Email,
-		Message: request.Message,
-	})
-
+	email := []byte("To: " + ch.env.ContactEmail + "\r\n" +
+		"Subject: Contact from " + request.Email + "\r\n\r\n" +
+		request.Message + "\r\n")
 	err = smtp.SendMail(
 		"smtp.gmail.com:587",
 		smtp.PlainAuth("", ch.env.EmailUsername, ch.env.EmailPassword, "smtp.gmail.com"),
 		ch.env.EmailUsername,
 		[]string{ch.env.ContactEmail},
-		buffer.Bytes(),
-		// []byte(request.Message),
+		email,
 	)
 	if err != nil {
 		respondWithError(&ErrorMessage{
@@ -77,18 +57,6 @@ func (ch *ContactHandler) receiveContact(w http.ResponseWriter, r *http.Request)
 	}
 
 	w.WriteHeader(http.StatusNoContent)
-}
-
-func generateEmailTemplate() string {
-	return `
-		From: {{.From}}<br />
-		To: {{.To}}<br />
-		Subject: {{.Subject}}<br />
-		MIME-version: 1.0<br />
-		Content-Type: text/html; charset=&quot;UTF-8&quot;<br />
-		<br />
-		{{.Message}}
-	`
 }
 
 func newContactHandler(env *env.Env) *ContactHandler {
