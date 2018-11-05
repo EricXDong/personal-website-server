@@ -17,13 +17,7 @@ type ContactRequest struct {
 	Message string `json:"message"`
 }
 
-type emailParameters struct {
-	To      string
-	Subject string
-	Message string
-}
-
-func (ch *ContactHandler) receiveContact(w http.ResponseWriter, r *http.Request) {
+func (ch ContactHandler) receiveContact(w http.ResponseWriter, r *http.Request) {
 	data, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		respondWithError(createHTTPBodyError(err), http.StatusBadRequest, &w)
@@ -43,7 +37,7 @@ func (ch *ContactHandler) receiveContact(w http.ResponseWriter, r *http.Request)
 		request.Message + "\r\n")
 	err = smtp.SendMail(
 		"smtp.gmail.com:587",
-		smtp.PlainAuth("", ch.env.EmailUsername, ch.env.EmailPassword, "smtp.gmail.com"),
+		ch.env.EmailAuth,
 		ch.env.EmailUsername,
 		[]string{ch.env.ContactEmail},
 		email,

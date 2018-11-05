@@ -16,6 +16,7 @@ RUN go get -v github.com/canthefason/go-watcher/cmd/watcher
 ADD . .
 RUN dep ensure -v
 
+EXPOSE 5000
 RUN go install
 
 ENTRYPOINT [ "watcher" ]

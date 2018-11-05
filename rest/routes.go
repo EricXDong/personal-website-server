@@ -17,5 +17,8 @@ func SetupRoutes(env *env.Env) *mux.Router {
 	ch := newContactHandler(env)
 	apiRouter.HandleFunc("/contact", ch.receiveContact).Methods("POST")
 
+	vh := newVideosHandler(env)
+	apiRouter.HandleFunc("/videos", vh.login).Methods("POST")
+
 	return r
 }
