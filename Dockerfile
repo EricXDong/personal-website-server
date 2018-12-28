@@ -1,4 +1,4 @@
-FROM golang:1.11-alpine3.7 as development
+FROM golang:1.10.7-alpine3.7 as development
 
 # Install git
 RUN apk update

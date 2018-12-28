@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"personal-website-server/env"
 	"personal-website-server/rest"
 )
@@ -12,6 +13,7 @@ func main() {
 	env := env.GetEnv()
 
 	r := rest.SetupRoutes(env)
-	fmt.Println("Server listening on port 5000")
-	log.Fatal(http.ListenAndServe(":5000", r))
+	port := os.Getenv("PORT")
+	fmt.Println("Server listening on port " + port)
+	log.Fatal(http.ListenAndServe(":"+port, r))
 }
