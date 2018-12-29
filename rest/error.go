@@ -6,7 +6,7 @@ import (
 )
 
 type ErrorMessage struct {
-	Error       error  `json:"error"`
+	Error       string `json:"error"`
 	Description string `json:"description"`
 }
 
@@ -21,14 +21,14 @@ func respondWithError(em *ErrorMessage, status int, w *http.ResponseWriter) {
 
 func createHTTPBodyError(err error) *ErrorMessage {
 	return &ErrorMessage{
-		Error:       err,
+		Error:       err.Error(),
 		Description: "Error reading request HTTP body",
 	}
 }
 
 func createJSONParseError(err error) *ErrorMessage {
 	return &ErrorMessage{
-		Error:       err,
+		Error:       err.Error(),
 		Description: "Error parsing request HTTP body to JSON",
 	}
 }

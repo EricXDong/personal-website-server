@@ -44,7 +44,7 @@ func (ch ContactHandler) receiveContact(w http.ResponseWriter, r *http.Request) 
 	)
 	if err != nil {
 		respondWithError(&ErrorMessage{
-			Error:       err,
+			Error:       err.Error(),
 			Description: "Error sending contact message",
 		}, http.StatusInternalServerError, &w)
 		return

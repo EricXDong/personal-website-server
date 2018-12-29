@@ -23,7 +23,7 @@ ENTRYPOINT [ "watcher" ]
 
 # PRODUCTION BUILD
 
-FROM alpine:latest
+FROM golang:1.10.7-alpine3.7
 
 RUN mkdir /app
 WORKDIR /app
