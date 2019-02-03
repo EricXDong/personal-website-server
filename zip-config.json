@@ -1,8 +1,0 @@
-{
-    "directories": [
-        "env", "rest", "vendor"
-    ],
-    "files": [
-        "main.go"
-    ]
-}

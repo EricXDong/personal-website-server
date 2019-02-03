@@ -12,8 +12,13 @@ import (
 func main() {
 	env := env.GetEnv()
 
-	r := rest.SetupRoutes(env)
-	port := os.Getenv("PORT")
-	fmt.Println("Server listening on port " + port)
-	log.Fatal(http.ListenAndServe(":"+port, r))
+	if env.Deployment == "docker" {
+		r := rest.SetupRoutes(env)
+		port := os.Getenv("PORT")
+		fmt.Println("Server listening on port " + port)
+		log.Fatal(http.ListenAndServe(":"+port, r))
+	} else {
+		//	Running on lambda
+		handleLambdaRequest(env)
+	}
 }

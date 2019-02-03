@@ -2,6 +2,47 @@
 
 
 [[projects]]
+  digest = "1:3c1b2a3b4f61355c883f878b5754bc27c0d159151cf84fbe21913756d74f539c"
+  name = "github.com/aws/aws-lambda-go"
+  packages = [
+    "events",
+    "lambda",
+    "lambda/messages",
+    "lambdacontext",
+  ]
+  pruneopts = "UT"
+  revision = "928161204cad89472f9e6b5dd49ce16bc91230de"
+  version = "v1.8.1"
+
+[[projects]]
+  digest = "1:03027f53cf0e799dc2dc455af00a71b7eb35b33282c1a86d1dc0089a7fc91b8b"
+  name = "github.com/aws/aws-sdk-go"
+  packages = [
+    "aws",
+    "aws/awserr",
+    "aws/awsutil",
+    "aws/client",
+    "aws/client/metadata",
+    "aws/credentials",
+    "aws/endpoints",
+    "aws/request",
+    "aws/signer/v4",
+    "internal/ini",
+    "internal/sdkio",
+    "internal/sdkrand",
+    "internal/shareddefaults",
+    "private/protocol",
+    "private/protocol/query",
+    "private/protocol/query/queryutil",
+    "private/protocol/rest",
+    "private/protocol/xml/xmlutil",
+    "service/ses",
+  ]
+  pruneopts = "UT"
+  revision = "81f3829f5a9d041041bdf56e55926691309d7699"
+  version = "v1.16.26"
+
+[[projects]]
   digest = "1:abeb38ade3f32a92943e5be54f55ed6d6e3b6602761d74b4aab4c9dd45c18abd"
   name = "github.com/fsnotify/fsnotify"
   packages = ["."]
@@ -43,6 +84,13 @@
   pruneopts = "UT"
   revision = "8cb6e5b959231cc1119e43259c4a608f9c51a241"
   version = "v1.0.0"
+
+[[projects]]
+  digest = "1:bb81097a5b62634f3e9fec1014657855610c82d19b9a40c17612e32651e35dca"
+  name = "github.com/jmespath/go-jmespath"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "c2b33e84"
 
 [[projects]]
   digest = "1:c568d7727aa262c32bdf8a3f7db83614f7af0ed661474b24588de635c20024c7"
@@ -146,6 +194,10 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/aws/aws-lambda-go/events",
+    "github.com/aws/aws-lambda-go/lambda",
+    "github.com/aws/aws-sdk-go/aws",
+    "github.com/aws/aws-sdk-go/service/ses",
     "github.com/gorilla/mux",
     "github.com/spf13/viper",
   ]

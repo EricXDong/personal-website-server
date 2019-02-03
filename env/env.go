@@ -15,6 +15,7 @@ type Env struct {
 	VideosPassword string
 	Logger         *log.Logger
 	EmailAuth      smtp.Auth
+	Deployment     string
 }
 
 func GetEnv() *Env {
@@ -35,6 +36,7 @@ func GetEnv() *Env {
 	env.ContactEmail = viper.GetString("contactEmail")
 	env.EmailAuth = smtp.PlainAuth("", env.EmailUsername, env.EmailPassword, "smtp.gmail.com")
 	env.VideosPassword = viper.GetString("videosPassword")
+	env.Deployment = os.Getenv("deployment")
 
 	return env
 }
