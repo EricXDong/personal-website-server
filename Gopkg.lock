@@ -15,7 +15,7 @@
   version = "v1.8.1"
 
 [[projects]]
-  digest = "1:03027f53cf0e799dc2dc455af00a71b7eb35b33282c1a86d1dc0089a7fc91b8b"
+  digest = "1:ac25f9fc8c4b99db67595c21c849bc40910e78308b9973f1bf512372e0bd452a"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -23,13 +23,23 @@
     "aws/awsutil",
     "aws/client",
     "aws/client/metadata",
+    "aws/corehandlers",
     "aws/credentials",
+    "aws/credentials/ec2rolecreds",
+    "aws/credentials/endpointcreds",
+    "aws/credentials/processcreds",
+    "aws/credentials/stscreds",
+    "aws/csm",
+    "aws/defaults",
+    "aws/ec2metadata",
     "aws/endpoints",
     "aws/request",
+    "aws/session",
     "aws/signer/v4",
     "internal/ini",
     "internal/sdkio",
     "internal/sdkrand",
+    "internal/sdkuri",
     "internal/shareddefaults",
     "private/protocol",
     "private/protocol/query",
@@ -37,6 +47,7 @@
     "private/protocol/rest",
     "private/protocol/xml/xmlutil",
     "service/ses",
+    "service/sts",
   ]
   pruneopts = "UT"
   revision = "81f3829f5a9d041041bdf56e55926691309d7699"
@@ -197,6 +208,7 @@
     "github.com/aws/aws-lambda-go/events",
     "github.com/aws/aws-lambda-go/lambda",
     "github.com/aws/aws-sdk-go/aws",
+    "github.com/aws/aws-sdk-go/aws/session",
     "github.com/aws/aws-sdk-go/service/ses",
     "github.com/gorilla/mux",
     "github.com/spf13/viper",

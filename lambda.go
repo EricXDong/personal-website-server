@@ -40,12 +40,26 @@ func handleLambdaRequest(env *env.Env) {
 		}
 
 		//	Call appropriate handler based on type argument
+		data := message.Data
+		LambdaHandler := lambdahandlers.LambdaHandler{
+			Env: env,
+		}
 		switch message.Type {
 		case Videos:
 			handler := lambdahandlers.LambdaVideosHandler{
-				Env: env,
+				LambdaHandler: LambdaHandler,
 			}
-			return handler.Handle(message.Data["password"].(string))
+			return handler.Handle(data["password"].(string))
+
+		case Contact:
+			handler := lambdahandlers.LambdaContactHandler{
+				LambdaHandler: LambdaHandler,
+			}
+			return handler.Handle(
+				data["email"].(string),
+				data["message"].(string),
+			)
+
 		default:
 			evt.StatusCode = 500
 			evt.Body = "Invalid event type"

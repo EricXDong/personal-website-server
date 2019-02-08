@@ -1,17 +1,11 @@
 package lambdahandlers
 
 import (
-	"personal-website-server/env"
-
 	"github.com/aws/aws-lambda-go/events"
 )
 
-type LambdaVideosRequest struct {
-	Password string `json:"password"`
-}
-
 type LambdaVideosHandler struct {
-	Env *env.Env
+	LambdaHandler
 }
 
 func (lvh *LambdaVideosHandler) Handle(password string) (events.APIGatewayProxyResponse, error) {
